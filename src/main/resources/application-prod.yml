@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:/usr/local/feedback/db/feedback.db
+    #    username: root
+    #    password: "000000"
+    driver-class-name: org.sqlite.JDBC
+  mybatis:
+    config-location: classpath:/mybatis/config.xml
+  mapper:
+    not-empty: false
+    identity: SQLITE
+  freemarker:
+    allow-request-override: true
+    allow-session-override: true
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    expose-request-attributes: true
+    expose-session-attributes: true
+    expose-spring-macro-helpers: true
+    request-context-attribute: request
+    prefer-file-system-access: true
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+mybatis:
+  config-location: classpath:/mybatis/config.xml
+server:
+  port: 8888
