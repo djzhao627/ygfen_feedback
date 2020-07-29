@@ -34,8 +34,10 @@ public class MessageServiceImpl implements MessageService {
         if (count > 0) {
             PageHelper.startPage((pageBean.getOffset() / pageBean.getLimit()) + 1, pageBean.getLimit());
             Example example = new Example(Message.class);
-            if (StringUtils.isNotBlank(pageBean.getOrder())) {
+            if (StringUtils.isNotBlank(pageBean.getOrder()) && StringUtils.isNotBlank(pageBean.getSort())) {
                 example.setOrderByClause(pageBean.getSort() + " " + pageBean.getOrder());
+            } else {
+                example.setOrderByClause("create_time DESC");
             }
 
             Example.Criteria criteria = example.createCriteria();
@@ -46,7 +48,6 @@ public class MessageServiceImpl implements MessageService {
                         .orLike("mobile", "%" + pageBean.getSearch() + "%")
                         .orLike("content", "%" + pageBean.getSearch() + "%");
             }
-            example.setOrderByClause("create_time DESC");
             List<Message> list = messageDao.selectByExample(example);
             return TableData.bulid(count, list);
         }

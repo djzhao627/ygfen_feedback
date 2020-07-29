@@ -36,13 +36,11 @@ public class IndexController {
     }
 
     @PostMapping("/doLogin")
-    public ModelAndView doLogin(String username, String password, HttpSession session) {
-        ModelAndView mv = new ModelAndView("login");
+    public String doLogin(String username, String password, HttpSession session) {
         if ("ygf".equals(username) && "ygf123456!".equals(password)) {
             session.setAttribute("hasLogin", username);
-            mv.setViewName("index");
         }
-        return mv;
+        return "redirect:/";
     }
 
     /**
